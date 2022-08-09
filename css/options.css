@@ -1,0 +1,30 @@
+
+.container {
+    max-width: 800px;
+}
+
+.savemessage {
+    margin: 2em;
+    color: #888;
+}
+
+.red {
+    color: #F00;
+}
+
+.orange {
+    color: #F80;
+}
+
+.green {
+    color: #0F0;
+}
+
+.blue {
+    color: #00F;
+}
+
+.enablekey {
+    display: inline;
+    width: 50px
+}

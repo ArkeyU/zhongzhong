@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/options.css" />
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="js/options.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class='container'>
+        <h2>Zhongzhong Preferences</h2>
+
+        <div class="savemessage">
+            Changes are applied automatically. Reload each tab for theme changes to become visible.
+        </div>
+        <div>
+            <i>Scroll down to see keyboard shortcuts.</i>
+        </div>
+
+        <form id="optform" name="optform">
+            <h3>Dictionaries</h3>
+            <label for="dicts">Default dictionary</label>. Change dictionary used by default (change with Shift or Return key):
+            <p>
+                <select id="dicts" name="dicts" class="form-control">
+                    <option value="engHan">Chinese-English</option>
+                    <option value="hanEng">Character info</option>
+                </select>
+            </p>
+            <h3>Display options</h3>
+            <label for="chars">Character set</label>. Choose whether to show only simplified characters, traditional characters or both:
+            <p>
+                <select id="chars" name="chars" class="form-control">
+                    <option value="both">both</option>
+                    <option value="traditional">traditional</option>
+                    <option value="simplified">simplified</option>
+                </select>
+            </p>
+            <p>
+                <label>
+                    <input id="pinyin" type="checkbox" name="pinyin"> Show Pinyin.
+                </label>
+                Turn on and off the Pinyin phonetic symbols.
+            </p>
+            <p>
+            <label>
+                <input id="tonecolors" type="checkbox" name="tonecolors" class="tone-color"> Show tone colors.
+            </label>
+            Turn colors for the Pinyin syllables on and off.
+            <span id="resettonecolors"><a href="javascript:void(0)">Reset to default colors</a></span>
+            <div class="row">
+                <div class="col-xs-2">
+                    First tone:
+                    <input type="text" id="tone1" class="form-control tone-color" value="#F00">
+                </div>
+                <div class="col-xs-2">
+                    Second tone:
+                    <input type="text" id="tone2" class="form-control tone-color" value="#F80">
+                </div>
+                <div class="col-xs-2">
+                    Third tone:
+                    <input type="text" id="tone3" class="form-control tone-color" value="#0F0">
+                </div>
+                <div class="col-xs-2">
+                    Fourth tone:
+                    <input type="text" id="tone4" class="form-control tone-color" value="#00F">
+                </div>
+                <div class="col-xs-2">
+                    Neutral tone:
+                    <input type="text" id="tone5" class="form-control tone-color" value="#A0A0A0">
+                </div>
+            </div>
+            </p>
+            <p>
+                <label>
+                    <input id="zhuyin" type="checkbox" name="zhuyin"> Show Zhuyin (Bopomofo).
+                </label>
+                Turn Zhuyin (Bopomofo) on and off. Zhuyin are Taiwan's phonetic symbols.
+            </p>
+            <p>
+                <label>
+                    <input id="definitions" type="checkbox" name="definitions"> Show word definitions.
+                </label>
+                Uncheck to show only pronunciation.
+            </p>
+            <p>
+                <label>
+                    <input id="grammar" type="checkbox" name="grammar"> Show grammar and usage notes.
+                </label>
+            </p>
+            <h3>Read aloud</h3>
+            <label for="voice">Voice</label> for the read-aloud feature:
+            <p>
+                <select id="voice" name="voice" class="form-control">
+                    <option value="zh-CN">Mainland China</option>
+                    <option value="zh-TW">Taiwan</option>
+                </select>
+            </p>
+            <h3>Look&amp;Feel</h3>
+            <label for="popupcolor">Theme</label>:
+            <p>
+                <select id="popupcolor" name="popupcolor" class="form-control">
+                    <option value="white">White</option>
+                    <option value="blue">Blue</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="black">Black</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+            </p>
+            <label for="fontSize">Font size</label>:
+            <p>
+                <select id="fontSize" name="fontSize" class="form-control">
+                    <option value="large">Large</option>
+                    <option value="small">Small</option>
+                </select>
+            </p>
+            <label for="font">Font</label> for the Chinese characters:
+            <p>
+                <select id="font" name="font" class="form-control">
+                    <option value="sans">Sans serif</option>
+                    <option value="serif">Serif</option>
+                    <option value="handdrawn">Hand-drawn</option>
+                </select>
+            </p>
+            <h3>Skritter options</h3>
+            <label for="skritterTLD">Skritter domain</label>. For some users <code>skritter.cn</code> might work better (Skritter login required):
+            <br /><code>disabled</code> will disable the Skritter shortcut <code>S</code>
+            <p>
+                <select id="skritterTLD" name="skritterTLD" class="form-control">
+                    <option value="com">skritter.com</option>
+                    <option value="cn">skritter.cn</option>
+                    <option value="disabled">disabled</option>
+                </select>
+            </p>
+            <hr>
+            <h2>Keyboard shortcuts</h2>
+            <p><i>In order to make Zhongzhong work in input fields and text areas, hold down the Alt-key on your keyboard.</i></p>
+            <p>
+                <label>
+                    <input id="shortcuts" type="checkbox" name="shortcuts"> Enable quick settings.
+                </label>
+                You can disable the keyboard shortcuts for quick settings if you don't use them and keep hitting the keys by mistake.
+            </p>
+            <p>
+                <label>
+                    <input id="shortcutsLookup" type="checkbox" name="shortcutsLookup"> Enable lookup keyboard shortcuts.
+                </label>
+                You can disable the keyboard shortcuts to look up online resources if you don't use them and keep hitting the keys by mistake.
+            </p>
+            <h3>Keyboard actions:</h3>
+            <p>
+                <table style="margin: 20px;" cellspacing=5 cellpadding=5>
+                    <tr><td><b>Alt +&nbsp;<input type="text" id="enableKey" class="form-control enablekey" maxlength="1">&nbsp;:</b></td><td style="font-weight: bold;">&nbsp;Enable/Disable Zhongzhong</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>N&nbsp;:</b></td><td>&nbsp;Next word</td></tr>
+                    <tr><td><b>B&nbsp;:</b></td><td>&nbsp;Previous character</td></tr>
+                    <tr><td><b>M&nbsp;:</b></td><td>&nbsp;Next character</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>V&nbsp;:</b></td><td style="font-weight: bold;">&nbsp;Read word aloud</td></tr>
+                    <tr><td><b>Shift/Enter&nbsp;:</b></td><td style="font-weight: bold;">&nbsp;Switch dictionaries</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>A&nbsp;:</b></td><td>&nbsp;Alternate popup location</td></tr>
+                    <tr><td><b>Y&nbsp;:</b></td><td>&nbsp;Move popup location down</td></tr>
+                    <tr><td><b>X&nbsp;:</b></td><td>&nbsp;Move popup location up</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>C&nbsp;:</b></td><td>&nbsp;Copy to clipboard</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>S&nbsp;:</b></td><td>&nbsp;Add word to Skritter queue</td></tr>
+                    <tr><td><b>&nbsp;</b></td><td>&nbsp;</td></tr>
+                    <tr><td><b>R&nbsp;:</b></td><td>&nbsp;Save word to the internal word list</td></tr>
+                    <tr><td><b>Alt + W&nbsp;:</b></td><td>&nbsp;Show the word list</td></tr>
+                </table>
+            </p>
+            <h3>Quick settings:</h3>
+            <p>
+                <table style="margin: 20px;" cellspacing=5 cellpadding=5>
+                    <tr><td><b>D&nbsp;:</b></td><td>&nbsp;Display/hide definitions</td></tr>
+                    <tr><td><b>P&nbsp;:</b></td><td>&nbsp;Display/hide Pinyin</td></tr>
+                    <tr><td><b>Z&nbsp;:</b></td><td>&nbsp;Display/hide Zhuyin (Bopomofo)</td></tr>
+                </table>
+            </p>
+            <h3>Look up selected text in online resource:</h3>
+            <p>
+                <table style="margin: 20px;" cellspacing=5 cellpadding=5>
+                    <tr><td><b>Alt + 1&nbsp;:</b></td><td>&nbsp;LINE Dict (formerly nciku)</td></tr>
+                    <tr><td><b>Alt + 2&nbsp;:</b></td><td>&nbsp;YellowBridge</td></tr>
+                    <tr><td><b>Alt + 3&nbsp;:</b></td><td>&nbsp;Dict.cn</td></tr>
+                    <tr><td><b>Alt + 4&nbsp;:</b></td><td>&nbsp;iCIBA</td></tr>
+                    <tr><td><b>Alt + 5&nbsp;:</b></td><td>&nbsp;MDBG</td></tr>
+                    <tr><td><b>Alt + 6&nbsp;:</b></td><td>&nbsp;JuKuu (manual search)</td></tr>
+                    <tr><td><b>Alt + 7&nbsp;:</b></td><td>&nbsp;Moedict</td></tr>
+                    <tr><td><b>Alt + 8&nbsp;:</b></td><td>&nbsp;Baidu Baike</td></tr>
+                    <tr><td><b>T&nbsp;:</b></td><td>&nbsp;Tatoeba</td></tr>
+                    <tr><td><b>K&nbsp;:</b></td><td style="font-weight: bold;">&nbsp;Study character in Koohii.com (NEW)</td></tr>
+                </table>
+            </p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+#zhongwen-window, #zhongwen-window * {
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: #FFFFFF;
+  border: none !important;
+  border-spacing: 0px;
+  margin: 0px;
+  padding: 0px;
+  letter-spacing: normal;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0px;
+  text-transform: none;
+  white-space: normal;
+  word-spacing: normal;
+  font-weight: normal;
+  font-size: 12px;
+  font-family: Tahoma, Geneva, sans-serif;
+  visibility: visible;
+}
+
+#zhongwen-window {
+  position: absolute;
+  z-index: 999999999;
+  border: 1px solid #D0D0D0 !important;
+  padding: 4px;
+  background: #5C73B8;
+  top: 5px;
+  left: 5px;
+  min-width: 100px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px -5px #999;
+}
+
+#zhongwen-window .w-hanzi {
+  font-size: 32px;
+  color: #B7E7FF;
+  margin-right: 0.7em;
+}
+
+#zhongwen-window .w-pinyin {
+  font-size: 18px;
+  color: #C0FFC0;
+}
+
+#zhongwen-window .w-def {
+  font-size: 16px;
+}
+
+#zhongwen-window .w-zhuyin {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+#zhongwen-window .w-zhuyin.w-hanzi-serif, #zhongwen-window .w-zhuyin.w-hanzi-handdrawn {
+  font-family: PMingLiU, 'Apple LiGothic';
+}
+
+#zhongwen-window .w-zhuyin-small.w-hanzi-serif, #zhongwen-window .w-zhuyin-small.w-hanzi-handdrawn {
+  font-family: PMingLiU, 'Apple LiGothic';
+}
+
+#zhongwen-window .w-hanzi-small {
+  font-size: 18px;
+  color: #B7E7FF;
+  margin-right: 0.7em;
+}
+
+#zhongwen-window .w-hanzi-serif {
+  font-family: serif;
+}
+
+#zhongwen-window .w-hanzi-handdrawn {
+  font-family: 楷体, KaiTi, 华文楷体, STKaiti;
+}
+
+#zhongwen-window .w-pinyin-small {
+  font-size: 16px;
+  color: #C0FFC0;
+}
+
+#zhongwen-window .w-def-small {
+  font-size: 12px;
+}
+
+#zhongwen-window .w-zhuyin-small {
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+#zhongwen-window .tone1 {
+  color: #EE363E;
+}
+
+#zhongwen-window .tone2 {
+  color: #F47C36;
+}
+
+#zhongwen-window .tone3 {
+  color: #73BB4F;
+}
+
+#zhongwen-window .tone4 {
+  color: #649CD3;
+}
+
+#zhongwen-window .tone5 {
+  color: #A0A0A0;
+}
+
+#zhongwen-window .grammar {
+  font-weight: bold;
+  color: lightblue;
+}
+
+/* used for hanzi information */
+
+#zhongwen-window .k-main-tb {
+	width: 300px;
+}
+
+#zhongwen-window .k-hanzi {
+	font-size: 48px;
+	color: #B7E7FF;
+	vertical-align: middle;
+}
+
+#zhongwen-window .k-eigo {
+	font-size: 12px;
+}
+
+/* hanzi radical, grade, freq, strokes box */
+
+#zhongwen-window .k-abox-tb {
+	width: 120px;
+	margin-bottom: 4px;
+	float: right;
+	clear: right;
+}
+
+#zhongwen-window .k-abox-r {
+	font-size: 12px;
+	text-align: center;
+	padding: 1px 4px;
+	background: #5A70B5;
+	color: #FFFFFF;
+}
+
+#zhongwen-window .k-abox-g {
+	font-size: 12px;
+	text-align: center;
+	padding: 1px 4px;
+	background: #4C63A8;
+	color: #B7E7FF;
+}
+
+#zhongwen-window .k-abox-f {
+	font-size: 12px;
+	text-align: center;
+	padding: 1px 4px;
+	background: #4C63A8;
+	color: #B7E7FF;
+}
+
+#zhongwen-window .k-abox-s {
+	font-size: 12px;
+	text-align: center;
+	padding: 1px 4px;
+	background: #5A70B5;
+	color: #FFFFFF;
+}
+
+/* hanzi components box */
+
+#zhongwen-window .k-bbox-tb {
+	width: 120px;
+	margin-bottom: 4px;
+	float: right;
+	clear: right;
+}
+
+#zhongwen-window .k-bbox-0a {
+	vertical-align: top;
+	font-size: 11px;
+	padding: 1px 3px;
+	background: #5A70B5;
+	color: #FFFFFF;
+}
+
+#zhongwen-window .k-bbox-0b {
+	vertical-align: top;
+	font-size: 11px;
+	padding: 1px 3px;
+	background: #5A70B5;
+	color: #FFFFFF;
+}
+
+#zhongwen-window .k-bbox-1a {
+	vertical-align: top;
+	font-size: 11px;
+	padding: 1px 3px;
+	background: #4C63A8;
+	color: #B7E7FF;
+}
+
+#zhongwen-window .k-bbox-1b {
+	vertical-align: top;
+	font-size: 11px;
+	padding: 1px 3px;
+	background: #4C63A8;
+	color: #B7E7FF;
+}
+
+
+/* hanzi: misc index */
+
+#zhongwen-window .k-mix-tb {
+	width: 100%
+}
+
+#zhongwen-window .k-mix-td0 {
+	font-size: 12px;
+	background: #5A70B5;
+	color: #B7E7FF;
+}
+
+#zhongwen-window .k-mix-td1 {
+	font-size: 12px;
+	background: #4C63A8;
+	color: #FFFFFF;
+}
