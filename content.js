@@ -803,33 +803,44 @@ var zhongwenContent = {
   },
 
   makeHtmlEnglishDict: function(entry, showToneColors) {
-    var html = '';
+    let html = ' ';
     let texts = [];
     for (var i = 0; i < entry.data.length; ++i) {
       let e = entry.data[i][0].match(/^([^\s]+?)\s+([^\s]+?)\s+\[(.*?)\]?\s*\/(.+)\//);
       if (!e) continue;
-
+      /* e = [0 All     "雞蛋 鸡蛋 [ji1 dan4] /(chicken) egg/hen's egg/CL:個|个[ge4],打[da2]/", 
+              1 Trad    '雞蛋',
+              2 Simpl    '鸡蛋',
+              3 Pinyin   'ji1 dan4',
+              4 Definition "(chicken) egg/hen's egg/CL:個|个[ge4],打[da2]"]
+      */
+      
+      html += "<div>";
       // Hanzi
-
-      var hanziClass = 'w-hanzi';
-      if (window.zhongwen.config.fontSize == 'small') {
-        hanziClass += '-small';
-      }
+      let hanziClass = 'w-hanzi';
+      if (window.zhongwen.config.fontSize == 'small') hanziClass += '-small';
 
       let fontClass = '';
-      if (window.zhongwen.config.font == 'serif') {
-        fontClass = 'w-hanzi-serif';
-      } else if (window.zhongwen.config.font == 'handdrawn') {
-        fontClass = 'w-hanzi-handdrawn';
+      if (window.zhongwen.config.font == 'serif') fontClass = 'w-hanzi-serif';
+      if (window.zhongwen.config.font == 'handdrawn') fontClass = 'w-hanzi-handdrawn';
+
+      let pinyin = e[3].split(/\s/);
+      let simChars = "";
+      let tradChars = "";
+      for (let i in pinyin) {
+       let tone = this.parse(pinyin[i])[4];
+       let trad = e[1][i];
+       let sim = e[2][i];
+       let toneColor = window.zhongwen.config.tones[tone - 1];
+       tradChars += `<span style="color:${toneColor}">${trad}</span>`
+       simChars += `<span style="color:${toneColor}">${sim}</span>`
       }
-
       hanziClass = hanziClass + ' ' + fontClass;
-
       if(window.zhongwen.config.chars == 'both' || window.zhongwen.config.chars == 'simplified') {
-        html += '<span class="' + hanziClass + '">' + e[2] + '</span>&nbsp;';
+        html += '<span class="' + hanziClass + '">' + simChars + '</span>';
       }
       if (window.zhongwen.config.chars == 'both' && e[1] != e[2] || window.zhongwen.config.chars == 'traditional') {
-        html += '<span class="' + hanziClass + '">' + e[1] + '</span>&nbsp;';
+        html += '<span class="' + hanziClass + '">' + tradChars + '</span>';
       }
 
       // Pinyin
@@ -868,7 +879,8 @@ var zhongwenContent = {
       if (window.zhongwen.config.grammar != 'no' && entry.grammar && entry.grammar.index == i) {
         html += '<span class="grammar">Press "g" for grammar and usage notes.</span><br>'
       }
-
+      html += "</div>"
+      
       texts[i] = [e[2], e[1], p[1], translation, e[3]];
     }
     if (entry.more) {
@@ -1059,9 +1071,7 @@ var zhongwenContent = {
       }
 
       if (i > 0) {
-        html += '&nbsp;';
         text += ' ';
-        zhuyin += '&nbsp;'
       }
       if (syllable == 'r5') {
         if (showToneColors) {
