@@ -136,7 +136,6 @@ initStorage("popupcolor", "white");
 initStorage("tonecolors", "yes");
 initStorage("fontSize", "small");
 initStorage("font", "sans");
-initStorage("skritterTLD", "com");
 initStorage("chars", "both");
 initStorage("dicts", "engHan");
 initStorage("zhuyin", "no");
@@ -150,7 +149,6 @@ initStorage("tone3", "#0F0");
 initStorage("tone4", "#00F");
 initStorage("tone5", "#A0A0A0");
 initStorage("shortcuts", "no");
-initStorage("shortcutsLookup", "yes");
 initStorage("enableKey", "Z");
 
 
@@ -159,7 +157,6 @@ zhongwenMain.config.css = localStorage.popupcolor;
 zhongwenMain.config.tonecolors = localStorage.tonecolors;
 zhongwenMain.config.fontSize = localStorage.fontSize;
 zhongwenMain.config.font = localStorage.font;
-zhongwenMain.config.skritterTLD = localStorage.skritterTLD;
 zhongwenMain.config.chars = localStorage.chars;
 zhongwenMain.config.dicts = localStorage.dicts;
 zhongwenMain.config.zhuyin = localStorage.zhuyin;
@@ -173,7 +170,6 @@ zhongwenMain.config.tones = [localStorage.tone1,
                localStorage.tone4,
                localStorage.tone5];
 zhongwenMain.config.shortcuts = localStorage.shortcuts;
-zhongwenMain.config.shortcutsLookup = localStorage.shortcutsLookup;
 zhongwenMain.config.enableKey = localStorage.enableKey;
 
 

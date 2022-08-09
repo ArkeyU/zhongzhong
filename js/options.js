@@ -45,17 +45,6 @@ function loadVals() {
         document.optform.font[2].selected = true;
     }
 
-    storedValue = localStorage['skritterTLD'];
-    if(storedValue == 'cn') {
-        document.optform.skritterTLD[1].selected = true;
-    }
-    else if(storedValue == 'disabled') {
-        document.optform.skritterTLD[2].selected = true;
-    }
-    else {
-        document.optform.skritterTLD[0].selected = true;
-    }
-
     storedValue = localStorage['chars'];
     if(storedValue == 'both') {
         document.optform.chars[0].selected = true;
@@ -92,7 +81,6 @@ function loadVals() {
     }
 
     document.optform.shortcuts.checked = localStorage['shortcuts'] == 'yes';
-    document.optform.shortcutsLookup.checked = localStorage['shortcutsLookup'] == 'yes';
 
     document.optform.enableKey.value = localStorage['enableKey'] || 'Z';
     console.log(document.optform.enableKey.value, localStorage['enableKey'] || 'Z')
@@ -122,9 +110,6 @@ function storeVals() {
     localStorage['font'] = document.optform.font.value;
     chrome.extension.getBackgroundPage().zhongwenMain.config.font = localStorage['font'];
 
-    localStorage['skritterTLD'] = document.optform.skritterTLD.value;
-    chrome.extension.getBackgroundPage().zhongwenMain.config.skritterTLD = localStorage['skritterTLD'];
-
     localStorage['chars'] = document.optform.chars.value;
     chrome.extension.getBackgroundPage().zhongwenMain.config.chars = localStorage['chars'];
 
@@ -148,9 +133,6 @@ function storeVals() {
 
     localStorage['shortcuts'] = document.optform.shortcuts.checked ? 'yes' : 'no';
     chrome.extension.getBackgroundPage().zhongwenMain.config.shortcuts = localStorage['shortcuts'];
-
-    localStorage['shortcutsLookup'] = document.optform.shortcutsLookup.checked ? 'yes' : 'no';
-    chrome.extension.getBackgroundPage().zhongwenMain.config.shortcutsLookup = localStorage['shortcutsLookup'];
 
     localStorage['enableKey'] = document.optform.enableKey.value.toUpperCase();
     console.log(document.optform.enableKey.value.toUpperCase());
