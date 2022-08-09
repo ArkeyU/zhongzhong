@@ -15,15 +15,15 @@ function loadVals() {
 
     document.optform.tonecolors.checked = localStorage['tonecolors'] == 'yes';
 
-    document.optform.tone1.value = localStorage['tone1'] || "#F00";
+    document.optform.tone1.value = localStorage['tone1'] || "#ff8080";
     document.optform.tone1.style.color = document.optform.tone1.value;
-    document.optform.tone2.value = localStorage['tone2'] || "#F80";
+    document.optform.tone2.value = localStorage['tone2'] || "#80ff80";
     document.optform.tone2.style.color = document.optform.tone2.value;
-    document.optform.tone3.value = localStorage['tone3'] || "#0F0";
+    document.optform.tone3.value = localStorage['tone3'] || "#8080ff";
     document.optform.tone3.style.color = document.optform.tone3.value;
-    document.optform.tone4.value = localStorage['tone4'] || "#00F";
+    document.optform.tone4.value = localStorage['tone4'] || "#df80ff";
     document.optform.tone4.style.color = document.optform.tone4.value;
-    document.optform.tone5.value = localStorage['tone5'] || "#A0A0A0";
+    document.optform.tone5.value = localStorage['tone5'] || "#ddd";
     document.optform.tone5.style.color = document.optform.tone5.value;
 
     storedValue = localStorage['fontSize'];
@@ -80,8 +80,6 @@ function loadVals() {
         document.optform.voice[1].selected = true;
     }
 
-    document.optform.shortcuts.checked = localStorage['shortcuts'] == 'yes';
-
     document.optform.enableKey.value = localStorage['enableKey'] || 'Z';
     console.log(document.optform.enableKey.value, localStorage['enableKey'] || 'Z')
 }
@@ -131,9 +129,6 @@ function storeVals() {
     localStorage['voice'] = document.optform.voice.value;
     chrome.extension.getBackgroundPage().zhongwenMain.config.voice = localStorage['voice'];
 
-    localStorage['shortcuts'] = document.optform.shortcuts.checked ? 'yes' : 'no';
-    chrome.extension.getBackgroundPage().zhongwenMain.config.shortcuts = localStorage['shortcuts'];
-
     localStorage['enableKey'] = document.optform.enableKey.value.toUpperCase();
     console.log(document.optform.enableKey.value.toUpperCase());
     chrome.extension.getBackgroundPage().zhongwenMain.config.enableKey = localStorage['enableKey'];
@@ -147,15 +142,15 @@ $(function() {
     $('.tone-color').blur(setTextColorToValue);
 
     $('#resettonecolors').click(function(event) {
-      localStorage['tone1'] = document.optform.tone1.value = '#F00';
+      localStorage['tone1'] = document.optform.tone1.value = '#ff8080';
       document.optform.tone1.style.color = document.optform.tone1.value;
-      localStorage['tone2'] = document.optform.tone2.value = '#F80';
+      localStorage['tone2'] = document.optform.tone2.value = '#80ff80';
       document.optform.tone2.style.color = document.optform.tone2.value;
-      localStorage['tone3'] = document.optform.tone3.value = '#0F0';
+      localStorage['tone3'] = document.optform.tone3.value = '#8080ff';
       document.optform.tone3.style.color = document.optform.tone3.value;
-      localStorage['tone4'] = document.optform.tone4.value = '#00F';
+      localStorage['tone4'] = document.optform.tone4.value = '#df80ff';
       document.optform.tone4.style.color = document.optform.tone4.value;
-      localStorage['tone5'] = document.optform.tone5.value = '#A0A0A0';
+      localStorage['tone5'] = document.optform.tone5.value = '#ddd';
       document.optform.tone5.style.color = document.optform.tone5.value;
     });
 });
