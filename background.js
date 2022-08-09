@@ -132,7 +132,7 @@ function initStorage(key, defaultValue) {
   }
 }
 
-initStorage("popupcolor", "white");
+initStorage("popupcolor", "dark");
 initStorage("tonecolors", "yes");
 initStorage("fontSize", "small");
 initStorage("font", "sans");
