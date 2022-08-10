@@ -26,7 +26,7 @@
    "name": "Zhongzhong: An improved Chinese Dictionary",
    "options_page": "options.html",
    "permissions": [ "tabs", "contextMenus", "tts" ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
+   "update_url": "https://0.0.0.0",
    "version": "1.2.9",
    "web_accessible_resources": [ "css/*", "js/*", "images/*" ]
 }

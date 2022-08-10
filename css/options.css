@@ -1,3 +1,16 @@
+body {
+  background: #262626;
+  color: #eee;
+}
+
+.form-control {
+  background: #444;
+  color: white;
+}
+
+h1, h2, h3, a {
+  color: #3677ee;
+}
 
 .container {
     max-width: 800px;
