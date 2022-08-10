@@ -521,7 +521,6 @@ var zhongwenContent = {
     var ro = lastRo;
 
     var selEndList = lastSelEnd;
-
     if (!e) {
       zhongwenContent.hidePopup();
       zhongwenContent.clearHi();
@@ -533,6 +532,7 @@ var zhongwenContent = {
     tdata.uofs = (ro - tdata.prevRangeOfs);
 
     var rp = tdata.prevRangeNode;
+    if (!rp || !rp.data) return;
     // don't try to highlight form elements
     if (!('form' in tdata.prevTarget)) {
       var doc = rp.ownerDocument;
@@ -577,6 +577,9 @@ var zhongwenContent = {
     }
 
     var range = doc.createRange();
+    // ignore chars in extension popup
+    if (ro > rp.data.length) return;
+    if (rp.parentNode.dataset && rp.parentNode.dataset._zhongwen) return;
     range.setStart(rp, ro);
     range.setEnd(selEnd.node, offset);
 
@@ -628,33 +631,6 @@ var zhongwenContent = {
   _onMouseMove: function(ev) {
     var tdata = window.zhongwen;    // per-tab data
 
-    if(ev.target.nodeName == 'TEXTAREA' || ev.target.nodeName == 'INPUT'
-      || ev.target.nodeName == 'DIV' || ev.target.nodeName == 'IFRAME') {
-
-      var div = document.getElementById('_zhongwenDiv');
-
-      if (ev.altKey) {
-
-        if (!div && (ev.target.nodeName == 'TEXTAREA' || ev.target.nodeName == 'INPUT' ||
-          ev.target.nodeName == 'IFRAME')) {
-
-          div = zhongwenContent.makeDiv(ev.target);
-          document.body.appendChild(div);
-          div.scrollTop = ev.target.scrollTop;
-          div.scrollLeft = ev.target.scrollLeft;
-
-        }
-
-      } else {
-
-        if (div) {
-          document.body.removeChild(div);
-        }
-
-      }
-
-    }
-
     if (tdata.clientX && tdata.clientY) {
       if (ev.clientX == tdata.clientX && ev.clientY == tdata.clientY) {
         return;
@@ -670,21 +646,44 @@ var zhongwenContent = {
 
     var rp = range.startContainer;
     var ro = range.startOffset;
-
+    
     if (ev.target == tdata.prevTarget) {
-      if ((rp == tdata.prevRangeNode) && (ro == tdata.prevRangeOfs)) return;
+      if (this.isVisible() && (rp == tdata.prevRangeNode) && (ro == tdata.prevRangeOfs)) {
+        return;
+      }
     }
 
-    if (tdata.timer) {
-      clearTimeout(tdata.timer);
-      tdata.timer = null;
+    // out of bounds check
+    let bRange = document.createRange();
+    bRange.selectNode(rp);
+    let bounds = bRange.getBoundingClientRect();
+    
+    if ((ev.clientX + 5 < bounds.left || bounds.right < ev.clientX - 5 ) || (ev.clientY + 2 < bounds.top || bounds.bottom < ev.clientY - 2)) {
+      this.clearHi();
+      this.hidePopup();
+      return;
     }
-
-    if((rp.data) && ro == rp.data.length) {
-      rp = zhongwenContent.findNextTextNode(rp.parentNode, rp);
-      ro = 0;
+    
+    // About 50% into the character, offset will increase by one
+    // This fixes offset for the last character while keeping the popup location
+    if (rp && rp.data && rp.data.length == ro) {
+      range.setStart(range.startContainer, --range.startOffset);
+      range.setEnd(range.startContainer, range.startOffset);
+      ro -= 1;
     }
-
+    
+    if (rp && rp.data) {
+      let u = rp.data.charCodeAt(ro)
+      if ((isNaN(u)) ||
+        ((u != 0x25CB) &&
+          ((u < 0x3400) || (u > 0x9FFF)) &&
+          ((u < 0xF900) || (u > 0xFAFF)) &&
+          ((u < 0xFF21) || (u > 0xFF3A)) &&
+          ((u < 0xFF41) || (u > 0xFF5A)))) {
+        return;
+      }
+    }
+    
     // The case where the text before div is empty.
     if(rp && rp.parentNode != ev.target) {
       rp = zhongwenContent.findNextTextNode(rp.parentNode, rp);
@@ -696,7 +695,7 @@ var zhongwenContent = {
       rp = null;
       ro = -1;
     }
-
+    
     tdata.prevTarget = ev.target;
     tdata.prevRangeNode = rp;
     tdata.prevRangeOfs = ro;
@@ -704,12 +703,9 @@ var zhongwenContent = {
     this.uofsNext = 1;
 
     if ((rp) && (rp.data) && (ro < rp.data.length)) {
-      tdata.popX = ev.clientX;
-      tdata.popY = ev.clientY;
-      tdata.timer = setTimeout(
-        function() {
-          zhongwenContent.show(tdata);
-        }, 50);
+      tdata.popX = range.getBoundingClientRect().x;
+      tdata.popY = range.getBoundingClientRect().y;
+      zhongwenContent.show(tdata);
       return;
     }
 
@@ -815,7 +811,7 @@ var zhongwenContent = {
               4 Definition "(chicken) egg/hen's egg/CL:個|个[ge4],打[da2]"]
       */
       
-      html += "<div>";
+      html += '<div data-_zhongwen="1">';
       // Hanzi
       let hanziClass = 'w-hanzi';
       if (window.zhongwen.config.fontSize == 'small') hanziClass += '-small';
@@ -828,19 +824,19 @@ var zhongwenContent = {
       let simChars = "";
       let tradChars = "";
       for (let i in pinyin) {
-       let tone = this.parse(pinyin[i])[4];
-       let trad = e[1][i];
-       let sim = e[2][i];
-       let toneColor = window.zhongwen.config.tones[tone - 1];
-       tradChars += `<span style="color:${toneColor}">${trad}</span>`
-       simChars += `<span style="color:${toneColor}">${sim}</span>`
+        let tone = this.parse(pinyin[i])[4];
+        let trad = e[1][i];
+        let sim = e[2][i];
+        let toneColor = window.zhongwen.config.tones[tone - 1];
+        tradChars += `<span data-_zhongwen="1" style="color:${toneColor}">${trad}</span>`
+        simChars += `<span data-_zhongwen="1" style="color:${toneColor}">${sim}</span>`
       }
       hanziClass = hanziClass + ' ' + fontClass;
       if(window.zhongwen.config.chars == 'both' || window.zhongwen.config.chars == 'simplified') {
-        html += '<span class="' + hanziClass + '">' + simChars + '</span>';
+        html += '<span data-_zhongwen="1" class="' + hanziClass + '">' + simChars + '</span>';
       }
       if (window.zhongwen.config.chars == 'both' && e[1] != e[2] || window.zhongwen.config.chars == 'traditional') {
-        html += '<span class="' + hanziClass + '">' + tradChars + '</span>';
+        html += '<span data-_zhongwen="1" class="' + hanziClass + '">' + tradChars + '</span>';
       }
 
       // Pinyin
