@@ -118,7 +118,7 @@ chrome.extension.onRequest.addListener(function(request, sender, response) {
       }
       break;
     case 'speak':
-      chrome.tts.speak(request.text, {'lang': zhongwenMain.config.voice, rate: 0.5});
+      chrome.tts.speak(request.text, {'lang': zhongwenMain.config.voice, rate: 1});
       break;
     default:
   // ignore
