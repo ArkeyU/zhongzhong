@@ -703,8 +703,8 @@ var zhongwenContent = {
     this.uofsNext = 1;
 
     if ((rp) && (rp.data) && (ro < rp.data.length)) {
-      tdata.popX = range.getBoundingClientRect().x;
-      tdata.popY = range.getBoundingClientRect().y;
+      tdata.popX = range.getBoundingClientRect().left;
+      tdata.popY = range.getBoundingClientRect().bottom;
       zhongwenContent.show(tdata);
       return;
     }
