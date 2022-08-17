@@ -629,6 +629,11 @@ var zhongwenContent = {
     zhongwenContent._onMouseMove(ev);
   },
   _onMouseMove: function(ev) {
+    if (ev.buttons == 1) {
+      this.clearHi();
+      this.hidePopup();
+      return;
+    }
     var tdata = window.zhongwen;    // per-tab data
 
     if (tdata.clientX && tdata.clientY) {
