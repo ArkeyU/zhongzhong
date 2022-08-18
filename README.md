@@ -1,35 +1,32 @@
 # Zhongzhong
 
-Fork of the Zhongwen chrome extension that translates Chinese words when hovering on them.
+~~Fork~~ of the Zhongzhong chrome extension that translates Chinese words when hovering on them.
 
-The extension is missing a repository for open collaboration an since the developer didn't answer my messages I decided to fork it.
+Original: https://github.com/PabloRomanH/zhongzhong
 
-To install it go to:
+## Dictionary update
 
-<https://chrome.google.com/webstore/detail/zhongzhong-an-improved-ch/dggcgdjndddfmcfoipccicfoajmciacf>
+Prerequisites: Node.js
 
-## Build instructions
-
-Prerequisites: Python
-
-To update the dicitonary first clone this repo and change to the data directory
+1. Clone the repo
 
 ```shell
-git clone https://github.com/PabloRomanH/zhongzhong.git
+git clone https://github.com/ArkeyU/zhongzhong.git
 cd zhongzhong/data
 ```
 
-download a new version of [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict)
+2. Download a new version of [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cc-cedict)
 
 ```shell
 wget https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.zip 
 unzip cedict_1_0_ts_utf-8_mdbg.zip
 ```
 
-Run the script `index.py`
+3. Run the script `indexdict.js`
 
 ```shell
-python index.py
+node indexdict.js
 ```
 
-Test is by loading unpacked in Chrome.
+## Installation
+Clone and load it unpacked or pack it.
