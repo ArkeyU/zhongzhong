@@ -134,7 +134,7 @@ function initStorage(key, defaultValue) {
 
 initStorage("popupcolor", "dark");
 initStorage("tonecolors", "yes");
-initStorage("fontSize", "small");
+initStorage("fontSize", "large");
 initStorage("font", "sans");
 initStorage("chars", "both");
 initStorage("dicts", "engHan");
