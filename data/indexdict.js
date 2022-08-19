@@ -9,7 +9,7 @@ const dict = {};
 let index = 0;
 
 for (let line of lines) {
-  if (line[0] == "#") {
+  if (line[0] == "#" || line == "") {
     index += line.length + 1;
     continue;
   }
@@ -30,7 +30,7 @@ for (let line of lines) {
 }
 
 function saveToDict(key, value) {
-  if (!dict.key) {
+  if (!dict[key]) {
     dict[key] = [];
   }
   dict[key].push(value);
