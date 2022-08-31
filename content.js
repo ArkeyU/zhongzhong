@@ -828,8 +828,17 @@ var zhongwenContent = {
       let pinyin = e[3].split(/\s/);
       let simChars = "";
       let tradChars = "";
-      for (let i in pinyin) {
-        let tone = this.parse(pinyin[i])[4];
+      // Color Hanzi based on pinyin, Pinyin color itself is done later
+      for (let i=0; i<pinyin.length; i++) {
+        let tone = this.parse(pinyin[i]);
+        if (tone) {
+          tone = tone[4];
+        } else if (pinyin[i] == "r5") {
+          tone = 5;
+        } else {
+          console.error("ZhongZhong parse error");
+          console.error(pinyin);
+        }
         let trad = e[1][i];
         let sim = e[2][i];
         let toneColor = window.zhongwen.config.tones[tone - 1];
