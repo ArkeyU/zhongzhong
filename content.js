@@ -69,6 +69,7 @@ function keyEnabler(ev) {
 
 
 var zhongwenContent = {
+  divider: " • ",
   dictIndex: 0,
   altView: 0,
   offsetY: 0,
@@ -877,7 +878,7 @@ var zhongwenContent = {
       if (window.zhongwen.config.fontSize == 'small') {
         defClass += '-small';
       }
-      var translation = e[4].replace(/\//g, '; ');
+      var translation = e[4].replace(/\//g, this.divider);
 
       html += '<br>';
 
