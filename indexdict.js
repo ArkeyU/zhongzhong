@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const data = fs.readFileSync('cedict_ts.u8', 'utf8');
-const writeStream = fs.createWriteStream('cedict.idx');
+const data = fs.readFileSync('data/cedict_ts.u8', 'utf8');
+const writeStream = fs.createWriteStream('data/cedict.idx');
 
 const lines = data.split("\n");
 const dict = {};
@@ -39,12 +39,12 @@ function saveToDict(key, value) {
 let array = [];
 
 for (let [key, value] of Object.entries(dict)) {
-    let newline = key;
-    for (let entry of value) {
-        newline += ',' + entry;
-    }
-    newline += '\n';
-    array.push(newline);
+  let newline = key;
+  for (let entry of value) {
+      newline += ',' + entry;
+  }
+  newline += '\n';
+  array.push(newline);
 }
 
 array.sort();
@@ -53,12 +53,12 @@ for (let entry of array) {
 }
 
 writeStream.on('finish', () => {
-   console.log("donut");
+  console.log("donut");
 });
 
 writeStream.on('error', (err) => {
-    console.error("There was an error while writing");
-    console.error(err);
+  console.error("There was an error while writing");
+  console.error(err);
 });
 
 writeStream.end();
