@@ -210,74 +210,39 @@ var zhongwenMain = {
     if (dict === 0) {
       var entry = this.dict.wordSearch(text);
       if (entry != null) {
-        let nameIndex = [];
+        let toBottom = [];
         for (var i = 0; i < entry.data.length; i++) {
-          // entry.data[i] structure
-          // Sim Trad [Pinyin] /entry1/entry2/
-
-          // Hide classifiers
-          entry.data[i][0] = entry.data[i][0].replace(/CL:(.+?)\//,"");
-
-          // Hide references if there are multiple entries
-          let c = entry.data[i][0].trim().split("/").filter(x => x).length;
-          if (c > 2) {
-            entry.data[i][0] = entry.data[i][0].replace(/\/[\w ]*variant of .+?\[.+?\]\//, "");
-            entry.data[i][0] = entry.data[i][0].replace(/\/see .+?\[.+?\]\//, "");
-          }
-
-          // Move names at bottom
-          if (entry.data.length > 1) {
-            let isName = entry.data[i][0].match("name");
-            if (isName) {
-              nameIndex.push(i);
-            }
-          }
-
-          var word = entry.data[i][1];
+          
+          let word = entry.data[i][1];
           if (this.dict.hasKeyword(word) && (entry.matchLen == word.length)) {
             // the final index should be the last one with the maximum length
             entry.grammar = { keyword: word, index: i };
           }
-
-          var e = entry.data[i][0].match(/.*variant of ([^\^|[]+)/);
-          if (!e) {
-            e = entry.data[i][0].match(/\/see also ([^\^|[]+)/);
-          }
-
-          if (!e) {
-            e = entry.data[i][0].match(/\/see ([^\^|[]+)/);
-          }
-
-          if (e) {
-            var entry2 = this.dict.singleWordSearch(e[1]);
-            if (entry2) {
-              for (var add = 0; add < entry2.data.length; add++) {
-                var repeated = false;
-                for (var check = 0; check < entry.data.length; check++) {
-                  if (entry.data[check][0] == entry2.data[add][0]) {
-                    repeated = true;
-                    break;
-                  }
-                }
-                if (!repeated) {
-                  entry.data.push(entry2.data[add]);
-                }
-              }
+          
+          // Hide classifiers
+          entry.data[i][0] = entry.data[i][0].replace(/CL:(.+?)\//g,"");
+          
+          // Move names to bottom
+          if (entry.data.length > 1) {
+            let isName = entry.data[i][0].match("name");
+            if (isName) {
+              toBottom.push(i);
             }
           }
         }
 
-        // Splice names and put them at the end in correct order
-        let l = nameIndex.length;
+        // Splice and put them at the end in correct order
+        let l = toBottom.length;
         if (l > 0) {
           let s = [];
           for (let i = l-1; i >= 0; i--) {
-            s.push(entry.data.splice(nameIndex[i], 1)[0]);
+            s.push(entry.data.splice(toBottom[i], 1)[0]);
           }
           while (s.length > 0) {
             entry.data.push(s.pop());
           }
         }
+        
       }
       return entry;
     } else if (dict === 1) {

@@ -69,6 +69,7 @@ function keyEnabler(ev) {
 
 
 var zhongwenContent = {
+  reg: new RegExp("[a-zA-Z" + 'āáǎàēéěèīíǐìōóǒòūúǔù' + "]", "g"),
   divider: " • ",
   dictIndex: 0,
   altView: 0,
@@ -440,7 +441,6 @@ var zhongwenContent = {
     if (rangeParent.nodeType != Node.TEXT_NODE) {
       return '';
     }
-
     endIndex = Math.min(rangeParent.data.length, offset + maxLength);
     text += rangeParent.data.substring(offset, endIndex);
     selEndList.push( {
@@ -450,19 +450,24 @@ var zhongwenContent = {
 
     var nextNode = rangeParent;
     while (((nextNode = this.findNextTextNode(nextNode.parentNode, nextNode)) != null) && (text.length < maxLength)) {
-      text += this.getInlineText(nextNode, selEndList, maxLength - text.length);
+      let newText = this.getInlineText(nextNode, selEndList, maxLength - text.length);
+      // Ignore text which is hidden
+      if (window.getComputedStyle(nextNode.parentNode).display === "none") {
+        continue;
+      }
+      text += newText
     }
-
     return text;
   },
-
+  replacePenguins: function(string) {
+    return string.replace(zhongwenContent.reg, "");
+  },
   show: function(tdata, backwards) {
     var rp = tdata.prevRangeNode;
     var ro = tdata.prevRangeOfs + tdata.uofs;
     var u;
 
     tdata.uofsNext = 1;
-
     if (!rp) {
       this.clearHi();
       this.hidePopup();
@@ -499,13 +504,16 @@ var zhongwenContent = {
       this.hidePopup();
       return 3;
     }
-
-    //selection end data
+    
+    // selection end data
+    // text = The selected text
     var selEndList = [];
     var text = this.getTextFromRange(rp, ro, selEndList, 30 /*maxlength*/);
-
+    text = this.replacePenguins(text);
+    
     lastSelEnd = selEndList;
     lastRo = ro;
+    
     chrome.extension.sendRequest({
       type: 'search',
       text: text,
@@ -515,12 +523,11 @@ var zhongwenContent = {
 
     return 0;
   },
-
+  
+  // Function which processes the array of found characters + translations
   processEntry: function(e) {
     var tdata = window.zhongwen;
-
     var ro = lastRo;
-
     var selEndList = lastSelEnd;
     if (!e) {
       zhongwenContent.hidePopup();
